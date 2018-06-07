@@ -26,7 +26,7 @@ name, price, expirationDate, ingredients (array de strings)
 1. Al primer producto agregarle una propiedad `soldOut` en `true`. A los demas agregarla en `false`.
 
 
-## Ejercicio 5
+## Ejercicio 4
 1. Encapsular el ejercicio 3 en la clase ProductList (con los metodos publicos `list`, `get`, `add`, `remove`, `update`  que manejan el array de productos. Usar el minLength del ejericio anterior para validar que al realizar un alta o modificacion de un producto tenga al menos 8 caracteres. Ademas validar que todos los datos esten completos.
 *Importante:* Las funciones list y get deben devolver una copia de los datos para que permanezcan privados.
 Ejemplo de caso de uso

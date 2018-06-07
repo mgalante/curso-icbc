@@ -1,0 +1,88 @@
+﻿Javascript Basico
+
+
+Tipos:
+number
+string
+boolean
+null
+undefined 
+object
+array
+function
+
+DuckTyping
+
+consola:
+-debugger y breakpoints
+-console.log,warn,error
+-console.group
+-console.groupEnd
+-console.count
+-console.assert
+
+Comparadores
+=== y !== no convierten los valores
+== si por ejemplo "5" == 5 es true. NO USAR
+
+Valores "falsos":
+""
+''
+null
+0
+undefined
+false
+
+OJO: "false" es true
+
+//no importa el orden, funciona siempre dentro del scope. La funciona tiene nombre (bueno para debugging)
+
+function sumar(x, y){
+    return x + y;
+}
+
+var sumar = function(x, y){
+    return x + y;
+}
+
+Se usa igual:
+sumar(10,20)
+//referenciar a la funcion
+sumar
+
+
+
+funciones
+funciones anonimas
+funciones (callbacks)
+function factories
+Objetos con funciones
+
+
+Notacion JSON
+definicion de objetos, arrays
+ABM
+Acceso dinámico
+loops (for in, for of, while, for)
+
+
+Underscore:
+Manejo de colecciones y objetos
+filter
+keys
+sort
+find
+findIndex
+
+
+jQuery
+Selectores
+each
+children, closest, parent, find
+append/Instert
+Eventos: on
+Ajax
+Promises
+
+
+Testing con karma+jasmin
