@@ -30,6 +30,7 @@ name, price, expirationDate, ingredients (array de strings)
 1. Encapsular el ejercicio 3 en la clase ProductList (con los metodos publicos `list`, `get`, `add`, `remove`, `update`  que manejan el array de productos. Usar el minLength del ejericio anterior para validar que al realizar un alta o modificacion de un producto tenga al menos 8 caracteres. Ademas validar que todos los datos esten completos.
 *Importante:* Las funciones list y get deben devolver una copia de los datos para que permanezcan privados.
 Ejemplo de caso de uso
+
 ```javascript
 var productList = new ProductList();
 var product = {
@@ -48,20 +49,10 @@ productList.update(product.name);
 productList.remove(5);
 ```
 
-## Ejercicio 6
-1. Realizar una clase (utilizando funcion y prototype) `Rectangle`. Que soporte los siguiente caso de uso
-
-```javascript
-var rectangle = new Rectangle(10,20);
-rectangle.getDiameter() // retorna 60
-
-var square = new Rectangle(10); //OK Entiende que es un cuadrado de 10x10
-square.getArea() //retorna 100
-```
-
 ## Ejercicio 7
 1. Mostrar en pantalla el array de productos del ejercicio 5
 
 ## Ejercicio 8
 1. Realizar la UI completa para manejar la clase 
+(Solo agregar productos)
 
