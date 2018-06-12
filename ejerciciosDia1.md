@@ -56,3 +56,9 @@ productList.remove(5);
 1. Realizar la UI completa para manejar la clase 
 (Solo agregar productos)
 
+
+## Instalacion de server y base
+npm install -g local-web-server json-server
+
+ws --rewrite "/api/* -> http://localhost:3000/$1"
+json-server db.json

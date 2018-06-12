@@ -13,33 +13,32 @@ function generateId() {
 }
 
 ProducList.prototype.add = function (product) {
-    $.ajax({
-        url: "/api/products",
-        data: product,
-        method: "post"
-    });
+    var newProduct = copy(product);
+    if (!newProduct.id) {
+        newProduct.id = generateId();
+    }
+    if (newProduct) {
+        this.products.push(newProduct);
+    }
+    return copy(newProduct);
 }
 
 ProducList.prototype.list = function () {
-    return $.ajax({
-        url: "/api/products",
-        method: "get"
-    });
+    return copy(this.products);
 }
 
 ProducList.prototype.remove = function (id) {
-    return $.ajax({
-        url: "/api/products/" + id,
-        method: "delete"
-    });
+    function filtro(x) {
+        return x.id !== id;
+    }
+
+    this.products = this.products.filter(filtro);
 }
 
 ProducList.prototype.update = function (product) {
-    return $.ajax({
-        url: "/api/products",
-        method: "put",
-        data: product
-    });
+    var productoActualizado = copy(product);
+    var index = this.products.findIndex(function (p) { return p.id === productoActualizado.id });
+    this.products[index] = productoActualizado;
 }
 
 ProducList.prototype.get = function (id) {
@@ -50,20 +49,37 @@ ProducList.prototype.get = function (id) {
 }
 
 var productList = new ProducList();
+productList.add({
+    nombre: "Galletitas",
+    precio: 20
+});
+
+productList.add({
+    nombre: "Budín",
+    precio: 15
+});
+
+productList.add({
+    nombre: "Jugo",
+    precio: 10
+});
+
+productList.remove(2)
+console.log(productList.list());
+var product = productList.get(1);
+product.precio = 21;
+productList.update(product);
+console.log(productList.list());
 
 function mostrarProductos() {
-    var productsPromise = productList.list();
-    productsPromise.then(function (products) {
-        var $ul = $("#products");
-        $ul.empty();
-        for (var i in products) {
-            var $li = $("<li>" + products[i].id + " " + products[i].nombre + "<button data-productid='" + products[i].id + "' class='js-borrar'>Borrar</button></li>");
-            $ul.append($li);
-        };
-    },
-    function(error){
-        console.error("error en ajax", error)
-    });
+
+    var products = productList.list();
+    var $ul = $("#products");
+    $ul.empty();
+    for (var i in products) {
+        var $li = $("<li>" + products[i].id + " " + products[i].nombre + "<button data-productid='" + products[i].id + "' class='js-borrar'>Borrar</button></li>");
+        $ul.append($li);
+    };
 }
 
 jQuery(function ($) {
@@ -79,17 +95,13 @@ jQuery(function ($) {
         }
     });
 
-    $("#products").on("click", ".js-borrar", function () {
+    $("#products").on("click",".js-borrar", function(){
         //$(this).closest("li").remove(); 
         //$(this).attr("data-productid")
         var id = $(this).data("productid");
         id = parseInt(id);
-        
-        var removePromise = productList.remove(id);
-
-        removePromise.then(function(){
-            mostrarProductos();
-        });
+        productList.remove(id);
+        mostrarProductos();
     });
 });
 
@@ -133,5 +145,5 @@ jQuery(function ($) {
         $("#nombres").append($li);
         //$li.appendTo($("#nombres"))
     });
-
 });
+
