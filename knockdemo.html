@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+</head>
+
+<body>
+    <h1 data-bind="text: nombre"></h1>
+    <h1 data-bind="text: apellido"></h1>
+    <h1 data-bind="text: nombreCompleto"></h1>
+    <input data-bind="value:nombre">
+
+    <button data-bind="click: borrarNombre">BRORAR!</button>
+    <ul data-bind="foreach:productos">
+      <li data-bind="text: nombre"></li>  
+    </ul>
+    <script>
+        function Producto(nombre){
+            var self = this;
+            self.nombre = ko.observable(nombre);
+        }
+
+        function Ejemplo() {
+            var self = this;
+            self.nombre = ko.observable();
+            self.apellido = ko.observable();
+
+            self.productos = ko.observableArray([
+                new Producto("HOLA"),
+                new Producto("CHAU")
+            ]);
+            
+            self.borrarNombre = function(){
+               self.nombre(""); 
+            }
+
+            self.nombreCompleto = ko.pureComputed(function () {
+                if (self.nombre()) {
+                    return self.nombre() + " " + self.apellido();
+                }
+                else {
+                    return "Sin Nombre!";
+                }
+            });
+
+            self.nombre("Juan");
+            self.apellido("Apellido");
+        }
+
+        var ejemploVM = new Ejemplo();
+        ko.applyBindings(ejemploVM);
+    </script>
+
+</body>
+
+</html>
